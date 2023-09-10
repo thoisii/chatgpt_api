@@ -4,9 +4,12 @@ import styles from './index.module.css'
 import sqlLogo from './assets/sql-logo.jpg'
 
 function App() {
+  //user query content
   const [queryDesc, setQueryDesc] = useState("");
+  //responce content
   const [showQuery, setShowQuery] = useState("Content Here");
 
+  //submit function
   const onSubmit = async (e) => {
     e.preventDefault();
     const sqlQuery = await genQuery();
@@ -15,6 +18,7 @@ function App() {
     console.log("returned from server: ", sqlQuery);
   }
 
+  //api call to backend
   const genQuery = async () => {
     const responce = await fetch("http://localhost:3005/generate", {
       method: "POST",
@@ -26,10 +30,11 @@ function App() {
     return data.responce.trim(); //cut extra spaces
   }
 
+  //html page
   return (
     <main className={styles.main}>
       <img src={sqlLogo} alt="" className={styles.icon} />
-      <h3>Generate SQL with AI</h3>
+      <h3>API calls with openAI</h3>
 
       <form onSubmit={onSubmit}>
         <input 
@@ -39,7 +44,7 @@ function App() {
           onChange={(e) => setQueryDesc(e.target.value)}
         />
         <input type="submit" value="Generate Query"/>
-
+        
         <pre>{showQuery}</pre>
       </form>
 

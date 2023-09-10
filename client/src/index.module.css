@@ -13,6 +13,9 @@
     font-weight: bold;
     font-style: normal;
   }
+  *{
+    background-color: white;
+  }
   .main,
   .main input {
     font-size: 16px;
